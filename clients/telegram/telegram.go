@@ -51,7 +51,7 @@ func (c *Client) Updates(offset, limit int) ([]Update, error) {
 	return res.Result, nil
 }
 
-func (c *Client) SendMassages(chatID int, text string) error {
+func (c *Client) SendMassage(chatID int, text string) error {
 	query := url.Values{}
 	query.Add("chat_id", strconv.Itoa(chatID))
 	query.Add("text", text)
