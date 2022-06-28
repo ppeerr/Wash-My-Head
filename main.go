@@ -3,11 +3,12 @@ package main
 import (
 	"flag"
 	"log"
+	"telegramBot/clients/telegram"
 )
 
 func main() {
-	var token string = mustToken() //tgClient = telegram.New(token)
-	log.Println(token)
+	tgClient := telegram.New(mustTgHost(), mustToken())
+	log.Println(tgClient)
 
 	//fetcher = fetcher.New()
 	//processor = processor.New()
@@ -28,4 +29,19 @@ func mustToken() string {
 	}
 
 	return *token
+}
+
+func mustTgHost() string {
+	var tgHost *string = flag.String(
+		"tg-bot-host",
+		"",
+		"telegram bots host",
+	)
+	flag.Parse()
+
+	if *tgHost == "" {
+		log.Fatal("Tg host is not specified")
+	}
+
+	return *tgHost
 }
